@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Proving NP-Completeness Using Reduction</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Noto+Serif:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="deck">
+
+  <!-- 1. Title -->
+  <section class="slide dark title-slide active" data-title="Title">
+    <h1 class="reveal">Proving NP-Completeness Using Reduction</h1>
+    <p class="subtitle reveal">Two conditions &nbsp;•&nbsp; 3-SAT &nbsp;•&nbsp; CLIQUE &nbsp;•&nbsp; VERTEX COVER</p>
+    <div class="chain reveal">
+      <span class="node n-orange">3-SAT</span><span class="arrow">→</span>
+      <span class="node n-slate">CLIQUE</span><span class="arrow">→</span>
+      <span class="node n-teal">VERTEX COVER</span>
+    </div>
+    <p class="presenter reveal">Presented By -: Chetan Randhe<br>PRN -: B24IT1012</p>
+  </section>
+
+  <!-- 2. Basics -->
+  <section class="slide" data-title="P, NP, NPC">
+    <h2 class="reveal">The Basics: P, NP and NP-Complete</h2>
+    <div class="cards three">
+      <article class="card reveal">
+        <span class="badge">P</span>
+        <h3>P</h3>
+        <p>Problems we can solve quickly (in polynomial time).</p>
+        <em>Example: sorting a list</em>
+      </article>
+      <article class="card reveal">
+        <span class="badge">NP</span>
+        <h3>NP</h3>
+        <p>Problems where a given answer can be checked quickly.</p>
+        <em>Example: Sudoku, 3-SAT</em>
+      </article>
+      <article class="card card-dark reveal">
+        <span class="badge badge-orange">NPC</span>
+        <h3>NP-Complete</h3>
+        <p>The hardest problems in NP. Solve one quickly and you can solve all of NP quickly.</p>
+        <em class="orange">Example: CLIQUE</em>
+      </article>
+    </div>
+    <div class="banner reveal"><strong>Every problem in P is also in NP.</strong> Whether P = NP is still an open question.</div>
+  </section>
+
+  <!-- 3. Two conditions -->
+  <section class="slide" data-title="Two Conditions">
+    <h2 class="reveal">Two Conditions for NP-Completeness</h2>
+    <div class="equation reveal">
+      <span class="pill p-navy">In NP</span><span class="op">+</span>
+      <span class="pill p-navy">NP-Hard</span><span class="op">=</span>
+      <span class="pill p-orange">NP-Complete</span>
+    </div>
+    <div class="cards two">
+      <article class="card reveal">
+        <div class="card-head"><span class="num">1</span><h3>Condition 1: It is in NP</h3></div>
+        <p>A proposed answer (a certificate) can be checked in polynomial time.</p>
+        <em>CLIQUE: check that the chosen vertices are all connected to each other.</em>
+      </article>
+      <article class="card reveal">
+        <div class="card-head"><span class="num">2</span><h3>Condition 2: It is NP-Hard</h3></div>
+        <p>Every problem in NP can be reduced to it in polynomial time.</p>
+        <em>In practice: reduce one known NP-complete problem to it.</em>
+      </article>
+    </div>
+  </section>
+
+  <!-- 4. How to prove -->
+  <section class="slide" data-title="How to Prove It">
+    <h2 class="reveal">How to Prove It Using Reduction</h2>
+    <div class="cards four">
+      <article class="card reveal"><span class="num dark-num">1</span><h3>Show B is in NP</h3><p>Show a solution can be verified in polynomial time.</p></article>
+      <article class="card reveal"><span class="num dark-num">2</span><h3>Pick a known problem A</h3><p>Choose a problem A already known to be NP-complete.</p></article>
+      <article class="card reveal"><span class="num dark-num">3</span><h3>Build the reduction</h3><p>Convert any instance of A into an instance of B, in polynomial time.</p></article>
+      <article class="card reveal"><span class="num dark-num">4</span><h3>Prove YES = YES</h3><p>A says YES exactly when B says YES.</p></article>
+    </div>
+    <div class="banner dark-banner reveal"><strong class="orange">Why it works:</strong> if B were easy, A would be easy too. But A is hard, so B must be hard.</div>
+  </section>
+
+  <!-- 5. 3-SAT -> CLIQUE -->
+  <section class="slide" data-title="3-SAT → CLIQUE">
+    <h2 class="reveal">Example 1: 3-SAT → CLIQUE</h2>
+    <div class="split">
+      <ol class="steps">
+        <li class="reveal"><span class="num">1</span><p><strong>Make vertices.</strong> Every literal in every clause becomes a vertex.</p></li>
+        <li class="reveal"><span class="num">2</span><p><strong>Add edges.</strong> Join two vertices if they are in different clauses and are not opposites (x and ¬x).</p></li>
+        <li class="reveal"><span class="num">3</span><p><strong>Result.</strong> The formula is satisfiable exactly when the graph has a clique of size k (k = number of clauses).</p></li>
+      </ol>
+      <div class="panel reveal">
+        <p class="formula">(x ∨ y ∨ z) ∧ (¬x ∨ y ∨ ¬z), so k = 2</p>
+        <svg viewBox="0 0 360 290" class="graph" role="img" aria-label="Graph for the 3-SAT to CLIQUE reduction">
+          <text x="80"  y="18" class="lbl">Clause 1</text>
+          <text x="280" y="18" class="lbl">Clause 2</text>
+          <!-- edges: different clauses, not opposites -->
+          <g class="edges">
+            <line class="edge" x1="80" y1="55"  x2="280" y2="145"/> <!-- x - y -->
+            <line class="edge" x1="80" y1="55"  x2="280" y2="235"/> <!-- x - ¬z -->
+            <line class="edge" x1="80" y1="145" x2="280" y2="55"/>  <!-- y - ¬x -->
+            <line class="edge" x1="80" y1="145" x2="280" y2="235"/> <!-- y - ¬z -->
+            <line class="edge" x1="80" y1="235" x2="280" y2="55"/>  <!-- z - ¬x -->
+            <line class="edge" x1="80" y1="235" x2="280" y2="145"/> <!-- z - y -->
+            <line class="edge hl" x1="80" y1="145" x2="280" y2="145"/> <!-- y - y -->
+          </g>
+          <g class="verts">
+            <circle cx="80"  cy="55"  r="17" class="v"/><text x="80"  y="60"  class="vt">x</text>
+            <circle cx="80"  cy="145" r="17" class="v vy"/><text x="80"  y="150" class="vt">y</text>
+            <circle cx="80"  cy="235" r="17" class="v"/><text x="80"  y="240" class="vt">z</text>
+            <circle cx="280" cy="55"  r="17" class="v"/><text x="280" y="60"  class="vt">¬x</text>
+            <circle cx="280" cy="145" r="17" class="v vy"/><text x="280" y="150" class="vt">y</text>
+            <circle cx="280" cy="235" r="17" class="v"/><text x="280" y="240" class="vt">¬z</text>
+          </g>
+        </svg>
+        <p class="caption">The y–y edge is a 2-clique: set y = TRUE and both clauses are satisfied.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. CLIQUE -> VERTEX COVER -->
+  <section class="slide" data-title="CLIQUE → VERTEX COVER">
+    <h2 class="reveal">Example 2: CLIQUE → VERTEX COVER</h2>
+    <div class="split">
+      <div class="left-col">
+        <ol class="steps">
+          <li class="reveal"><span class="num">1</span><p><strong>Start.</strong> Graph G with n vertices; we look for a clique of size k.</p></li>
+          <li class="reveal"><span class="num">2</span><p><strong>Build G′.</strong> The complement: join two vertices exactly when G did not.</p></li>
+          <li class="reveal"><span class="num">3</span><p><strong>Result.</strong> G has a k-clique exactly when G′ has a vertex cover of size n − k.</p></li>
+        </ol>
+        <div class="banner dark-banner reveal"><strong class="orange">Why:</strong> G′ has no edge inside the clique, so the other n − k vertices touch every edge.</div>
+      </div>
+      <div class="graphs reveal">
+        <div class="panel">
+          <h4>Graph G</h4>
+          <svg viewBox="0 0 200 200" class="graph small" role="img" aria-label="Graph G">
+            <g class="edges">
+              <line class="edge hl" x1="50"  y1="50"  x2="150" y2="50"/>
+              <line class="edge hl" x1="50"  y1="50"  x2="50"  y2="150"/>
+              <line class="edge hl" x1="150" y1="50"  x2="50"  y2="150"/>
+            </g>
+            <circle cx="50"  cy="50"  r="16" class="v vy"/><text x="50"  y="55"  class="vt">A</text>
+            <circle cx="150" cy="50"  r="16" class="v vy"/><text x="150" y="55"  class="vt">B</text>
+            <circle cx="50"  cy="150" r="16" class="v vy"/><text x="50"  y="155" class="vt">C</text>
+            <circle cx="150" cy="150" r="16" class="v"/><text x="150" y="155" class="vt">D</text>
+          </svg>
+          <p class="caption">Clique {A, B, C}<br>k = 3</p>
+        </div>
+        <div class="panel">
+          <h4>Complement G′</h4>
+          <svg viewBox="0 0 200 200" class="graph small" role="img" aria-label="Complement graph G prime">
+            <g class="edges">
+              <line class="edge" x1="150" y1="150" x2="50"  y2="50"/>
+              <line class="edge" x1="150" y1="150" x2="150" y2="50"/>
+              <line class="edge" x1="150" y1="150" x2="50"  y2="150"/>
+            </g>
+            <circle cx="50"  cy="50"  r="16" class="v"/><text x="50"  y="55"  class="vt">A</text>
+            <circle cx="150" cy="50"  r="16" class="v"/><text x="150" y="55"  class="vt">B</text>
+            <circle cx="50"  cy="150" r="16" class="v"/><text x="50"  y="155" class="vt">C</text>
+            <circle cx="150" cy="150" r="16" class="v vy"/><text x="150" y="155" class="vt">D</text>
+          </svg>
+          <p class="caption">Vertex cover {D}<br>n − k = 4 − 3 = 1</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Takeaways -->
+  <section class="slide dark" data-title="Key Takeaways">
+    <h2 class="reveal">Key Takeaways</h2>
+    <div class="chain big reveal">
+      <span class="node n-gray">SAT</span><span class="arrow">→</span>
+      <span class="node n-orange">3-SAT</span><span class="arrow">→</span>
+      <span class="node n-slate">CLIQUE</span><span class="arrow">→</span>
+      <span class="node n-teal">VERTEX COVER</span>
+    </div>
+    <p class="muted reveal">Each arrow means “reduces in polynomial time to”. SAT was the first NP-complete problem (Cook–Levin).</p>
+    <div class="cards three">
+      <article class="card card-navy reveal"><div class="card-head"><span class="num">1</span><h3>Check Condition 1</h3></div><p>Show a given solution can be verified quickly (it is in NP).</p></article>
+      <article class="card card-navy reveal"><div class="card-head"><span class="num">2</span><h3>Reduce from a known problem</h3></div><p>Start from a known NP-complete problem such as 3-SAT.</p></article>
+      <article class="card card-navy reveal"><div class="card-head"><span class="num">3</span><h3>Keep the answers matching</h3></div><p>The conversion must be fast, and YES must map to YES, NO to NO.</p></article>
+    </div>
+  </section>
+
+</div>
+
+<footer id="hud">
+  <span class="foot-title">NP-Completeness via Reduction</span>
+  <div id="dots"></div>
+  <div class="controls">
+    <button id="prev" aria-label="Previous slide">‹</button>
+    <span id="counter">1 / 7</span>
+    <button id="next" aria-label="Next slide">›</button>
+  </div>
+</footer>
+<div id="progress"><i></i></div>
+
+<script src="script.js"></script>
+</body>
+</html>
