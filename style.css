@@ -146,86 +146,13 @@ em{font-size:clamp(12px,1.3vw,16px);color:var(--gray)}
 /* ---------- Thank You slide ---------- */
 .thank-you-slide {
   justify-content: center;
-}
-.thank-you-container {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(14px, 2.5vh, 26px);
-  max-width: 1040px;
-  width: 100%;
-  margin: 0 auto;
-}
-.thank-you-header {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.thank-you-header .badge {
-  width: auto;
-  height: auto;
-  border-radius: 999px;
-  padding: 6px 16px;
-  font-size: clamp(11px, 1.1vw, 13px);
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  font-family: var(--sans);
-  align-self: flex-start;
-}
-.thank-you-header h1 {
-  font-size: clamp(34px, 5.5vw, 64px);
-  color: #fff;
-  line-height: 1.1;
-}
-.thank-you-chain {
-  margin: 6px 0;
-}
-.thank-you-chain .node {
-  padding: .45em 1.2em;
-  font-size: clamp(12px, 1.2vw, 15px);
-}
-.thank-you-chain .arrow {
-  font-size: 1.2em;
-}
-.presenter-info {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-top: 4px;
-}
-.highlight-text {
-  color: #fff;
-  font-weight: 700;
-}
-.action-row {
-  margin-top: auto;
-  padding-top: 10px;
-}
-.btn-restart {
-  background: var(--orange);
-  color: var(--navy);
-  border: none;
-  border-radius: 8px;
-  padding: 10px 22px;
-  font-size: clamp(13px, 1.3vw, 15px);
-  font-weight: 700;
-  font-family: var(--sans);
-  cursor: pointer;
-  display: inline-flex;
   align-items: center;
-  gap: 8px;
-  transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+  text-align: center;
 }
-.btn-restart:hover {
-  background: #ffb833;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 14px rgba(252, 163, 17, .38);
-}
-.btn-restart:active {
-  transform: translateY(0);
-}
-.thank-you-banner {
-  border: 1px solid rgba(252, 163, 17, .3);
-  background: #172442;
+.thank-you-title {
+  font-size: clamp(48px, 9vw, 96px);
+  color: #fff;
+  letter-spacing: -0.01em;
 }
 
 /* ---------- Responsive ---------- */

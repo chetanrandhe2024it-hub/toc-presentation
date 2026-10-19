@@ -1,0 +1,174 @@
+:root{
+  --navy:#14213D; --ink:#1B1F2E; --orange:#FCA311; --slate:#4A5A8C;
+  --teal:#2A9D8F; --gray:#6C757D; --paper:#FFFFFF; --mist:#EEF1F7; --line:#D9DEEA;
+  --serif:'Noto Serif', Cambria, Georgia, serif;
+  --sans:'Lato', Calibri, Arial, sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;background:#0d1530;font-family:var(--sans);color:var(--ink)}
+
+/* ---------- Deck ---------- */
+#deck{position:fixed;inset:0 0 44px 0}
+.slide{
+  position:absolute;inset:0;padding:clamp(20px,4.5vh,56px) clamp(20px,6vw,96px);
+  display:flex;flex-direction:column;justify-content:center;gap:clamp(14px,3vh,30px);
+  background:var(--paper);overflow-y:auto;
+  opacity:0;visibility:hidden;transform:translateX(24px);
+  transition:opacity .45s ease, transform .45s ease, visibility 0s .45s;
+}
+.slide.active{opacity:1;visibility:visible;transform:none;transition:opacity .45s ease, transform .45s ease}
+.slide.past{transform:translateX(-24px)}
+.slide.dark{background:var(--navy);color:#fff}
+
+h1,h2,h3,h4{font-family:var(--serif);color:var(--navy);line-height:1.2}
+.dark h1,.dark h2,.dark h3{color:#fff}
+h2{font-size:clamp(24px,4vw,40px)}
+h3{font-size:clamp(15px,1.7vw,20px);font-family:var(--sans);font-weight:700}
+p{font-size:clamp(13px,1.5vw,18px);line-height:1.5}
+em{font-size:clamp(12px,1.3vw,16px);color:var(--gray)}
+.orange{color:var(--orange)!important}
+.muted{color:#aab4cf;font-size:clamp(12px,1.3vw,16px)}
+
+/* ---------- Title slide ---------- */
+.title-slide{justify-content:center;padding-left:clamp(24px,9vw,140px)}
+.title-slide h1{font-size:clamp(30px,5.4vw,64px);color:#fff;max-width:14em}
+.subtitle{color:#dbe2f3;font-size:clamp(14px,1.8vw,22px)}
+.presenter{margin-top:clamp(8px,3vh,36px);font-size:clamp(14px,1.6vw,20px);color:#fff}
+
+/* ---------- Chain (flow chart) ---------- */
+.chain{display:flex;align-items:center;flex-wrap:wrap;gap:12px}
+.node{
+  padding:.7em 1.6em;border-radius:8px;font-weight:700;color:#fff;
+  font-size:clamp(13px,1.5vw,18px);letter-spacing:.02em;
+  animation:nodeGlow 6s ease-in-out infinite;
+}
+.n-orange{background:var(--orange);color:var(--navy)}
+.n-slate{background:var(--slate)}
+.n-teal{background:var(--teal)}
+.n-gray{background:#8d97a8;color:var(--navy)}
+.chain .node:nth-of-type(2){animation-delay:2s}
+.chain .node:nth-of-type(3){animation-delay:4s}
+.chain .node:nth-of-type(4){animation-delay:6s}
+.arrow{color:var(--orange);font-size:1.6em;font-weight:700;display:inline-block;animation:arrowNudge 2.4s ease-in-out infinite}
+.chain.big .node{padding:.8em 2em}
+@keyframes nodeGlow{0%,70%,100%{box-shadow:0 0 0 0 rgba(252,163,17,0)}85%{box-shadow:0 0 0 6px rgba(252,163,17,.28)}}
+@keyframes arrowNudge{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}
+
+/* ---------- Cards ---------- */
+.cards{display:grid;gap:clamp(12px,1.8vw,24px)}
+.cards.three{grid-template-columns:repeat(3,1fr)}
+.cards.two{grid-template-columns:repeat(2,1fr)}
+.cards.four{grid-template-columns:repeat(4,1fr)}
+.card{
+  background:var(--mist);border-radius:12px;padding:clamp(14px,2vw,26px);
+  display:flex;flex-direction:column;gap:10px;box-shadow:0 2px 6px rgba(20,33,61,.08);
+}
+.card-dark{background:var(--navy);color:#fff}
+.card-dark h3{color:#fff}.card-dark em{color:var(--orange)}
+.card-navy{background:#1F3159;color:#fff}
+.card-navy h3{color:#fff}
+.card-head{display:flex;align-items:center;gap:12px}
+.badge,.num{
+  flex:none;display:inline-grid;place-items:center;border-radius:50%;
+  background:var(--navy);color:#fff;font-weight:700;
+  width:clamp(34px,3.4vw,44px);height:clamp(34px,3.4vw,44px);font-size:clamp(12px,1.3vw,16px)
+}
+.badge-orange,.num{background:var(--orange);color:var(--navy)}
+.dark-num{background:var(--navy);color:#fff}
+.banner{
+  background:var(--mist);border-radius:10px;padding:clamp(12px,1.8vw,20px) clamp(14px,2vw,26px);
+  font-size:clamp(13px,1.5vw,18px);line-height:1.5
+}
+.dark-banner{background:var(--navy);color:#fff}
+
+/* ---------- Equation ---------- */
+.equation{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:clamp(8px,1.6vw,20px)}
+.pill{padding:.7em 2em;border-radius:8px;font-weight:700;font-size:clamp(14px,1.8vw,22px)}
+.p-navy{background:var(--navy);color:#fff}
+.p-orange{background:var(--orange);color:var(--navy)}
+.op{color:var(--orange);font-size:clamp(22px,3vw,36px);font-weight:700}
+
+/* ---------- Split layout / steps ---------- */
+.split{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(16px,3vw,44px);align-items:center}
+.left-col{display:flex;flex-direction:column;gap:clamp(12px,2.4vh,22px)}
+.steps{list-style:none;display:flex;flex-direction:column;gap:clamp(14px,3vh,28px)}
+.steps li{display:flex;gap:14px;align-items:flex-start}
+.steps p strong{color:var(--navy)}
+
+/* ---------- Panels & graphs ---------- */
+.panel{background:var(--mist);border-radius:12px;padding:clamp(12px,1.6vw,20px);text-align:center;box-shadow:0 2px 6px rgba(20,33,61,.08)}
+.panel h4{font-size:clamp(14px,1.6vw,19px);margin-bottom:6px}
+.formula{font-weight:700;color:var(--navy);margin-bottom:6px;font-size:clamp(12px,1.35vw,16px)}
+.caption{font-size:clamp(11px,1.2vw,14px);color:var(--ink);margin-top:6px}
+.graphs{display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px,1.6vw,20px)}
+.graph{width:100%;height:auto;max-height:42vh}
+.graph.small{max-height:30vh}
+.lbl{fill:var(--gray);font-size:13px;text-anchor:middle;font-family:var(--sans)}
+.vt{fill:#fff;font-size:15px;font-weight:700;text-anchor:middle;font-family:var(--sans)}
+.v{fill:var(--navy)}
+.v.vy{fill:var(--orange)}
+.vy + .vt{fill:var(--navy)}
+.edge{stroke:#9aa5bd;stroke-width:1.6;fill:none}
+.edge.hl{stroke:var(--orange);stroke-width:3.2}
+
+/* Graph animation: edges draw once when a slide becomes active, then the key edge softly pulses */
+.edge{stroke-dasharray:var(--len,400);stroke-dashoffset:var(--len,400)}
+.slide.active .edge{animation:drawEdge .9s ease forwards;animation-delay:calc(.35s + var(--i,0) * .1s)}
+.slide.active .edge.hl{animation:drawEdge .9s ease forwards, pulseEdge 3s ease-in-out 1.8s infinite;animation-delay:calc(.35s + var(--i,0) * .1s), 1.8s}
+@keyframes drawEdge{to{stroke-dashoffset:0}}
+@keyframes pulseEdge{0%,100%{opacity:1}50%{opacity:.55}}
+.v{transform-box:fill-box;transform-origin:center}
+.slide.active .v.vy{animation:vtxPulse 3s ease-in-out 1.8s infinite}
+@keyframes vtxPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+
+/* ---------- Reveal animation ---------- */
+.reveal{opacity:0;transform:translateY(12px)}
+.slide.active .reveal{animation:rise .55s ease forwards;animation-delay:calc(.12s + var(--r,0) * .1s)}
+@keyframes rise{to{opacity:1;transform:none}}
+
+/* ---------- HUD ---------- */
+#hud{
+  position:fixed;left:0;right:0;bottom:0;height:44px;display:flex;align-items:center;justify-content:space-between;
+  padding:0 clamp(12px,3vw,32px);background:#0d1530;color:#aab4cf;font-size:12px;z-index:10
+}
+#dots{display:flex;gap:8px}
+#dots button{width:9px;height:9px;border-radius:50%;border:0;background:#3a4668;cursor:pointer;padding:0;transition:background .2s,transform .2s}
+#dots button.on{background:var(--orange);transform:scale(1.25)}
+.controls{display:flex;align-items:center;gap:10px}
+.controls button{
+  width:28px;height:28px;border-radius:50%;border:1px solid #3a4668;background:transparent;color:#fff;
+  font-size:18px;line-height:1;cursor:pointer;transition:background .2s
+}
+.controls button:hover{background:#26335a}
+#progress{position:fixed;left:0;right:0;bottom:44px;height:3px;background:transparent;z-index:11}
+#progress i{display:block;height:100%;width:0;background:var(--orange);transition:width .4s ease}
+
+/* ---------- Thank You slide ---------- */
+.thank-you-slide {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.thank-you-title {
+  font-size: clamp(48px, 9vw, 96px);
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width:860px){
+  .cards.three,.cards.two,.split{grid-template-columns:1fr}
+  .cards.four{grid-template-columns:1fr 1fr}
+  .foot-title{display:none}
+  #hud{justify-content:space-between}
+}
+@media (max-width:520px){
+  .cards.four,.graphs{grid-template-columns:1fr}
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+  .edge{stroke-dashoffset:0}
+}
