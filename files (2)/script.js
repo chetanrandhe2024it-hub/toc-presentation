@@ -39,6 +39,7 @@
 
   document.getElementById('next').addEventListener('click', () => go(current + 1));
   document.getElementById('prev').addEventListener('click', () => go(current - 1));
+  document.getElementById('restart-btn')?.addEventListener('click', () => go(0));
 
   document.addEventListener('keydown', e => {
     if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); go(current + 1); }
